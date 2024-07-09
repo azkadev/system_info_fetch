@@ -86,7 +86,8 @@ class SystemInfoFetch {
     }
   }
 
-  static String Function(String origin_model) onGetTitle = (String originModel) {
+  static String Function(String origin_model) onGetTitle =
+      (String originModel) {
     return originModel;
   };
 
@@ -118,7 +119,8 @@ class SystemInfoFetch {
     }
   }
 
-  static String Function(String origin_model) onGetModel = (String originModel) {
+  static String Function(String origin_model) onGetModel =
+      (String originModel) {
     return originModel;
   };
 
@@ -193,7 +195,8 @@ class SystemInfoFetch {
 //     "Version": "7.1.0"
 // }
     var (int bandwith_download, bandwith_upload) = get_network_bandwith_usage;
-    var (int bandwith_download_by_pid, bandwith_upload_by_pid) = get_network_bandwith_usage_by_pid(
+    var (int bandwith_download_by_pid, bandwith_upload_by_pid) =
+        get_network_bandwith_usage_by_pid(
       pidProcces: pidProcces,
     );
     Map<String, String?> data = {
@@ -305,7 +308,8 @@ class SystemInfoFetch {
     String message = title;
     toJson(pidProcces: pidProcces).forEach((key, value) {
       value ??= "-";
-      String defaultValue = "${key.split("_").map((e) => e.toUpperCaseFirstData()).join(" ")}: ${value}";
+      String defaultValue =
+          "${key.split("_").map((e) => e.toUpperCaseFirstData()).join(" ")}: ${value}";
       if (rewrite != null) {
         message += rewrite.call(key, value, defaultValue);
       } else {
@@ -318,7 +322,7 @@ class SystemInfoFetch {
     return message;
   }
 
- static Stream<Map> realtimeToJson() async* {
+  static Stream<Map> realtimeToJson() async* {
     while (true) {
       await Future.delayed(Duration(microseconds: 1));
       yield toJson();
