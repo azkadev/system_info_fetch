@@ -46,10 +46,10 @@ import 'package:universal_io/io.dart';
   try {
     if (Dart.isAndroid || Dart.isLinux) {
       final file = File('/proc/${pidProcces}/net/dev');
-      String data = (file.readAsStringSync()).trim();
+      final String data = (file.readAsStringSync()).trim();
 
       if (data.isNotEmpty) {
-        List<String> datas = data.split("\n");
+        final List<String> datas = data.split("\n");
         datas.removeAt(0);
         datas.removeAt(0);
 
@@ -57,12 +57,9 @@ import 'package:universal_io/io.dart';
         int bandwith_upload = 0;
 
         for (var i = 0; i < datas.length; i++) {
-          String data_loop = datas[i];
+          final String data_loop = datas[i];
 
-          List<String> data_loops = data_loop
-              .split(" ")
-              .where((element) => element.trim().isNotEmpty)
-              .toList();
+          List<String> data_loops = data_loop.split(" ").where((element) => element.trim().isNotEmpty).toList();
           if (data_loops.isEmpty) {
             continue;
           }
@@ -89,10 +86,10 @@ import 'package:universal_io/io.dart';
   try {
     if (Dart.isAndroid || Dart.isLinux) {
       final file = File('/proc/net/dev');
-      String data = (file.readAsStringSync()).trim();
+      final String data = (file.readAsStringSync()).trim();
 
       if (data.isNotEmpty) {
-        List<String> datas = data.split("\n");
+        final List<String> datas = data.split("\n");
         datas.removeAt(0);
         datas.removeAt(0);
 
@@ -100,12 +97,9 @@ import 'package:universal_io/io.dart';
         int bandwith_upload = 0;
 
         for (var i = 0; i < datas.length; i++) {
-          String data_loop = datas[i];
+        final   String data_loop = datas[i];
 
-          List<String> data_loops = data_loop
-              .split(" ")
-              .where((element) => element.trim().isNotEmpty)
-              .toList();
+         final List<String> data_loops = data_loop.split(" ").where((element) => element.trim().isNotEmpty).toList();
           if (data_loops.isEmpty) {
             continue;
           }

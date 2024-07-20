@@ -43,7 +43,7 @@ OperatingSystemData getOperatingSystemData({
 }) {
   try {
     if (Dart.isAndroid) {
-      Map osData = {
+      final Map osData = {
         "@type": "osData",
         "name": "",
       };
@@ -66,12 +66,12 @@ OperatingSystemData getOperatingSystemData({
       return OperatingSystemData(osData);
     }
     if (Dart.isLinux) {
-      Map osData = {
+      final Map osData = {
         "@type": "osData",
         "name": "",
       };
 
-      String os_release = File("/etc/os-release").readAsStringSync();
+      final String os_release = File("/etc/os-release").readAsStringSync();
       final lines = os_release.split("\n");
       final variables = <String, String>{};
 
@@ -81,10 +81,7 @@ OperatingSystemData getOperatingSystemData({
           variables[split[0]] = split[1];
         }
       }
-      String os = variables["PRETTY_NAME"] ??
-          variables["NAME"] ??
-          variables["ID"] ??
-          "";
+      String os = variables["PRETTY_NAME"] ?? variables["NAME"] ?? variables["ID"] ?? "";
       if (os.startsWith('"')) {
         os = os.substring(1, os.length - 1);
       }

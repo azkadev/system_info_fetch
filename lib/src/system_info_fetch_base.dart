@@ -42,18 +42,17 @@ String get gpuInfo {
     "lspci",
     [],
   )).stdout.toString();
-  List<String> gpuRaws = data.split("\n");
-  List<String> gpus = [];
+  final List<String> gpuRaws = data.split("\n");
+  final List<String> gpus = [];
   for (var i = 0; i < gpuRaws.length; i++) {
-    String line = gpuRaws[i];
+    final String line = gpuRaws[i];
     if (!line.contains(":")) continue;
 
     final first = line.split(" ")[1];
     if (first != "Display" && first != "3D" && first != "VGA") {
       continue;
     }
-    String gpu =
-        line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
+    String gpu = line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
     if (gpu.startsWith("NVIDIA")) {
       gpu = RegExp("\\[(.*)\\]").firstMatch(gpu)?.group(1) ?? gpu;
     }
@@ -108,15 +107,11 @@ String? get shellInfo {
   }
   String? shellPath = Platform.environment["SHELL"];
   if (shellPath == null) return null;
-  String shell = shellPath.split("/").last;
+  final String shell = shellPath.split("/").last;
   String version = "";
   switch (shell) {
     case "zsh":
-      version = (Process.runSync(shellPath, ["--version"]))
-          .stdout
-          .toString()
-          .split(" ")[1]
-          .trim();
+      version = (Process.runSync(shellPath, ["--version"])).stdout.toString().split(" ")[1].trim();
       break;
   }
   return "${shell} ${version}".trim();
@@ -127,11 +122,7 @@ String? get shellInfo {
 // }
 
 String get titleInfo {
-  return "${(Process.runSync("id", [
-        "-un"
-      ])).stdout.toString().trim()}-${(Process.runSync("hostname", [
-        "-f"
-      ])).stdout.toString().trim()}";
+  return "${(Process.runSync("id", ["-un"])).stdout.toString().trim()}-${(Process.runSync("hostname", ["-f"])).stdout.toString().trim()}";
 }
 
 String get modelInfo {
@@ -142,13 +133,13 @@ String get modelInfo {
   }
   if (Platform.isLinux) {
     String model = "";
-    List<String> files = [
+    final List<String> files = [
       "/sys/devices/virtual/dmi/id/product_name",
       "/sys/devices/virtual/dmi/id/product_version",
     ];
     for (var i = 0; i < files.length; i++) {
-      String data = files[i];
-      File file = File(data);
+    final  String data = files[i];
+      final File file = File(data);
       if (file.existsSync()) {
         model += "${file.readAsStringSync().trim()} ";
       }
