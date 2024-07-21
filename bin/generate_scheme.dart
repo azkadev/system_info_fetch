@@ -135,6 +135,14 @@ void main(List<String> args) async {
       "version": "",
       "device_name": "Realme 5",
     },
+    {
+      "@type": "powerData",
+      
+      "level": 0,
+      
+      "is_charging": false,
+
+    }
   ];
 
   await jsonToScripts(schemes,

@@ -66,6 +66,50 @@ String get gpuInfo {
   return gpus.join("\n");
 }
 
+String get networkInfo {
+  final data = (Process.runSync(
+    "lspci",
+    [],
+  )).stdout.toString();
+  final List<String> networkRaws = data.split("\n");
+  final List<String> networks = [];
+  for (var i = 0; i < networkRaws.length; i++) {
+    final String line = networkRaws[i];
+    if (!line.contains(":")) continue;
+
+    final first = line.split(" ")[1];
+    if (first != "Network") {
+      continue;
+    }
+    String network = line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
+
+    networks.add(network.trim());
+  }
+  return networks.join("\n");
+}
+
+String get diskInfo {
+  final data = (Process.runSync(
+    "lspci",
+    [],
+  )).stdout.toString();
+  final List<String> networkRaws = data.split("\n");
+  final List<String> networks = [];
+  for (var i = 0; i < networkRaws.length; i++) {
+    final String line = networkRaws[i];
+    if (!line.contains(":")) continue;
+
+    final first = line.split(" ")[1];
+    if (RegExp("^(Non-Volatile memory controller:)", caseSensitive: false).hasMatch(line) == false && first != "Non-Volatile") {
+      continue;
+    }
+    String network = line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
+
+    networks.add(network.trim());
+  }
+  return networks.join("\n");
+}
+
 String get kernelInfo {
   if (Dart.isAndroid) {
     return (Process.runSync("uname", ["-svm"])).stdout.toString().trim();
@@ -107,11 +151,16 @@ String? get shellInfo {
   }
   String? shellPath = Platform.environment["SHELL"];
   if (shellPath == null) return null;
-  final String shell = shellPath.split("/").last;
+  final String shell = shellPath.split("/").last.trim();
   String version = "";
   switch (shell) {
     case "zsh":
       version = (Process.runSync(shellPath, ["--version"])).stdout.toString().split(" ")[1].trim();
+      break;
+    default:
+      try {
+        version = (Process.runSync(shellPath, ["--version"])).stdout.toString().split(" ")[1].trim();
+      } catch (e) {}
       break;
   }
   return "${shell} ${version}".trim();
@@ -136,12 +185,15 @@ String get modelInfo {
     final List<String> files = [
       "/sys/devices/virtual/dmi/id/product_name",
       "/sys/devices/virtual/dmi/id/product_version",
+      "/sys/devices/virtual/dmi/id/board_name",
     ];
     for (var i = 0; i < files.length; i++) {
-    final  String data = files[i];
+      final String data = files[i];
       final File file = File(data);
       if (file.existsSync()) {
-        model += "${file.readAsStringSync().trim()} ";
+        try {
+          model += "${file.readAsStringSync().trim()} ";
+        } catch (e) {}
       }
     }
     return model;

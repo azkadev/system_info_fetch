@@ -45,6 +45,7 @@ import 'package:system_info_fetch/cpu/cpu.dart';
 import 'package:system_info_fetch/memory/memory_core.dart';
 import 'package:system_info_fetch/network/bandwith_usage.dart';
 import 'package:system_info_fetch/os/os_core.dart';
+import 'package:system_info_fetch/power/power.dart';
 import 'package:system_info_fetch/scheme/scheme.dart';
 
 import 'src/system_info_fetch_base.dart' as sys_info;
@@ -56,6 +57,31 @@ class SystemInfoFetch {
   static String? get get_gpu {
     try {
       return sys_info.gpuInfo;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static String? get get_network {
+    try {
+      return sys_info.networkInfo;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static String? get get_disk {
+    try {
+      return sys_info.diskInfo;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  static String? get get_power {
+    try {
+      final PowerData powerData = getPowerData();
+      return "${powerData.level}% ${(powerData.is_charging == true) ? "Charging" : ""}";
     } catch (e) {
       return null;
     }
@@ -193,7 +219,7 @@ class SystemInfoFetch {
 //     "Version": "7.1.0"
 // }
     final (int bandwith_download, bandwith_upload) = get_network_bandwith_usage;
-    final  (int bandwith_download_by_pid, bandwith_upload_by_pid) = get_network_bandwith_usage_by_pid(
+    final (int bandwith_download_by_pid, bandwith_upload_by_pid) = get_network_bandwith_usage_by_pid(
       pidProcces: pidProcces,
     );
     final Map<String, String?> data = {
@@ -242,6 +268,9 @@ class SystemInfoFetch {
       "terminal": "",
       "cpu": cpuData.name,
       "gpu": get_gpu,
+      "network": get_network,
+      "disk": get_disk,
+      "power": get_power,
       "ram_total": FileSize.filesize(
         size: memory_ram.mem_total ?? 0,
       ),

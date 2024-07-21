@@ -90,9 +90,9 @@ int getRamUsageByPid({
   pid_procces ??= pid;
   try {
     if (Dart.isAndroid || Dart.isLinux) {
-     final  File proc_status = File("/proc/${pid_procces}/status");
+      final File proc_status = File("/proc/${pid_procces}/status");
       // [VmRSS  , 256364, kB]
-final       List<String> vm_rss = proc_status.readAsStringSync().split("\n").firstWhere((element) => RegExp("VmRSS", caseSensitive: false).hasMatch(element)).replaceAll(RegExp(":", caseSensitive: false), "").split(" ").where((element) => element.isNotEmpty).toList();
+      final List<String> vm_rss = proc_status.readAsStringSync().split("\n").firstWhere((element) => RegExp("VmRSS", caseSensitive: false).hasMatch(element)).replaceAll(RegExp(":", caseSensitive: false), "").split(" ").where((element) => element.isNotEmpty).toList();
       final int vm_rss_size = (int.tryParse(vm_rss[1]) ?? 0) * 1024;
       return vm_rss_size;
     }
