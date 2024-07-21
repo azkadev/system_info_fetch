@@ -277,8 +277,10 @@ class SystemInfoFetch {
       "ram_free": FileSize.filesize(size: memory_ram.mem_free ?? 0),
       "ram_available": FileSize.filesize(size: memory_ram.mem_available ?? 0),
       "swap_total": FileSize.filesize(size: memory_ram.swap_total ?? 0),
+
       "swap_free": FileSize.filesize(size: memory_ram.swap_free ?? 0),
       "swap_cache": FileSize.filesize(size: memory_ram.swap_cached ?? 0),
+      "ram_swap_total": FileSize.filesize(size: (memory_ram.swap_total ?? 0 )+ (memory_ram.mem_total ?? 0)),
       "version": "",
       // "total_bandwith_download": bandwith_download,
 
