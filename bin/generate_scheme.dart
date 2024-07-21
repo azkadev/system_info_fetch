@@ -126,25 +126,27 @@ void main(List<String> args) async {
       "terminal": "",
       "cpu": "AMD Ryzen 5 5500U with Radeon Graphics (12)",
       "gpu": "Advanced Micro Devices, Inc. [AMD/ATI] Lucienne",
+      "network": "MEDIATEK Corp. MT7921K (RZ608) Wi-Fi 6E 80MHz",
+      "disk": "Kingston Technology Company, Inc. OM8PCP Design-In PCIe 3 NVMe SSD (DRAM-less)",
+      "power": "86% Charging",
       "ram_total": "15 GB",
-      "ram_free": "2 GB",
-      "ram_available": "6 GB",
-      "swap_total": "8 GB",
-      "swap_free": "6 GB",
-      "swap_cache": "96 MB",
+      "ram_available": "8 GB",
+      "ram_usage": "7 GB",
+      "ram_cached": "6 GB",
+      "swap_total": "7 GB",
+      "swap_available": "7 GB",
+      "swap_cache": "28 KB",
+      "ram_commited": "16 GB",
+      "ram_swap_total": "22 GB",
       "version": "",
       "device_name": "Realme 5",
     },
     {
       "@type": "powerData",
-      
       "level": 0,
-      
       "is_charging": false,
-
     }
   ];
 
-  await jsonToScripts(schemes,
-      directory: Directory(join(Directory.current.path, "lib", "scheme")));
+  await jsonToScripts(schemes, directory: Directory(join(Directory.current.path, "lib", "scheme")));
 }
