@@ -72,6 +72,7 @@ MemoryData getRamData({
           key: value * 1024,
         });
       }
+      // memoryData.printPretty();
       return MemoryData(memoryData);
     }
   } catch (e) {
