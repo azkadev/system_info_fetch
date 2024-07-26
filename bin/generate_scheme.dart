@@ -140,6 +140,13 @@ void main(List<String> args) async {
       "ram_swap_total": "22 GB",
       "version": "",
       "device_name": "Realme 5",
+  "total_bandwith_download": "136.97 MB",
+  "total_bandwith_upload": "143.55 MB",
+  "total_bandwith": "280.52 MB",
+  "ram_usage_by_this_program": "271 MB",
+ 
+  "executable_type": "cli", 
+  "uptime_program": "604 millisecond(s) ago", 
     },
     {
       "@type": "powerData",

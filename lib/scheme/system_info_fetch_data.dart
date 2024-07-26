@@ -6,7 +6,7 @@ class SystemInfoFetchData extends JsonScheme {
   SystemInfoFetchData(super.rawData);
 
   static Map get defaultData {
-    return {"@type": "systemInfoFetchData", "title": "", "os": "Ubuntu 23.10", "platform_type": "Linux", "arch": "x86_64", "host": "Modern 14 B5M REV:1.0 ", "kernel": "Linux 6.5.0-14-generic x86_64", "uptime": "6 Hours ", "shell": "zsh 5.9", "resolution": null, "de": null, "wm": "", "wm_theme": "", "theme": "", "icons": "", "terminal": "", "cpu": "AMD Ryzen 5 5500U with Radeon Graphics (12)", "gpu": "Advanced Micro Devices, Inc. [AMD/ATI] Lucienne", "network": "MEDIATEK Corp. MT7921K (RZ608) Wi-Fi 6E 80MHz", "disk": "Kingston Technology Company, Inc. OM8PCP Design-In PCIe 3 NVMe SSD (DRAM-less)", "power": "86% Charging", "ram_total": "15 GB", "ram_available": "8 GB", "ram_usage": "7 GB", "ram_cached": "6 GB", "swap_total": "7 GB", "swap_available": "7 GB", "swap_cache": "28 KB", "ram_commited": "16 GB", "ram_swap_total": "22 GB", "version": "", "device_name": "Realme 5"};
+    return {"@type": "systemInfoFetchData", "title": "", "os": "Ubuntu 23.10", "platform_type": "Linux", "arch": "x86_64", "host": "Modern 14 B5M REV:1.0 ", "kernel": "Linux 6.5.0-14-generic x86_64", "uptime": "6 Hours ", "shell": "zsh 5.9", "resolution": null, "de": null, "wm": "", "wm_theme": "", "theme": "", "icons": "", "terminal": "", "cpu": "AMD Ryzen 5 5500U with Radeon Graphics (12)", "gpu": "Advanced Micro Devices, Inc. [AMD/ATI] Lucienne", "network": "MEDIATEK Corp. MT7921K (RZ608) Wi-Fi 6E 80MHz", "disk": "Kingston Technology Company, Inc. OM8PCP Design-In PCIe 3 NVMe SSD (DRAM-less)", "power": "86% Charging", "ram_total": "15 GB", "ram_available": "8 GB", "ram_usage": "7 GB", "ram_cached": "6 GB", "swap_total": "7 GB", "swap_available": "7 GB", "swap_cache": "28 KB", "ram_commited": "16 GB", "ram_swap_total": "22 GB", "version": "", "device_name": "Realme 5", "total_bandwith_download": "136.97 MB", "total_bandwith_upload": "143.55 MB", "total_bandwith": "280.52 MB", "ram_usage_by_this_program": "271 MB", "executable_type": "cli", "uptime_program": "604 millisecond(s) ago"};
   }
 
   String? get special_type {
@@ -489,6 +489,96 @@ class SystemInfoFetchData extends JsonScheme {
     rawData["device_name"] = value;
   }
 
+  String? get total_bandwith_download {
+    try {
+      if (rawData["total_bandwith_download"] is String == false) {
+        return null;
+      }
+      return rawData["total_bandwith_download"] as String;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  set total_bandwith_download(String? value) {
+    rawData["total_bandwith_download"] = value;
+  }
+
+  String? get total_bandwith_upload {
+    try {
+      if (rawData["total_bandwith_upload"] is String == false) {
+        return null;
+      }
+      return rawData["total_bandwith_upload"] as String;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  set total_bandwith_upload(String? value) {
+    rawData["total_bandwith_upload"] = value;
+  }
+
+  String? get total_bandwith {
+    try {
+      if (rawData["total_bandwith"] is String == false) {
+        return null;
+      }
+      return rawData["total_bandwith"] as String;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  set total_bandwith(String? value) {
+    rawData["total_bandwith"] = value;
+  }
+
+  String? get ram_usage_by_this_program {
+    try {
+      if (rawData["ram_usage_by_this_program"] is String == false) {
+        return null;
+      }
+      return rawData["ram_usage_by_this_program"] as String;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  set ram_usage_by_this_program(String? value) {
+    rawData["ram_usage_by_this_program"] = value;
+  }
+
+  String? get executable_type {
+    try {
+      if (rawData["executable_type"] is String == false) {
+        return null;
+      }
+      return rawData["executable_type"] as String;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  set executable_type(String? value) {
+    rawData["executable_type"] = value;
+  }
+
+  String? get uptime_program {
+    try {
+      if (rawData["uptime_program"] is String == false) {
+        return null;
+      }
+      return rawData["uptime_program"] as String;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  set uptime_program(String? value) {
+    rawData["uptime_program"] = value;
+  }
+
   static SystemInfoFetchData create({
     String special_type = "systemInfoFetchData",
     String? title,
@@ -522,9 +612,15 @@ class SystemInfoFetchData extends JsonScheme {
     String? ram_swap_total,
     String? version,
     String? device_name,
+    String? total_bandwith_download,
+    String? total_bandwith_upload,
+    String? total_bandwith,
+    String? ram_usage_by_this_program,
+    String? executable_type,
+    String? uptime_program,
   }) {
     // SystemInfoFetchData systemInfoFetchData = SystemInfoFetchData({
-    Map systemInfoFetchData_data_create_json = {
+    final Map systemInfoFetchData_data_create_json = {
       "@type": special_type,
       "title": title,
       "os": os,
@@ -557,6 +653,12 @@ class SystemInfoFetchData extends JsonScheme {
       "ram_swap_total": ram_swap_total,
       "version": version,
       "device_name": device_name,
+      "total_bandwith_download": total_bandwith_download,
+      "total_bandwith_upload": total_bandwith_upload,
+      "total_bandwith": total_bandwith,
+      "ram_usage_by_this_program": ram_usage_by_this_program,
+      "executable_type": executable_type,
+      "uptime_program": uptime_program,
     };
 
     systemInfoFetchData_data_create_json.removeWhere((key, value) => value == null);
