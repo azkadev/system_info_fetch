@@ -48,9 +48,16 @@ CpuData getCpuData({
         "name": "",
       };
       final String cpuInfo = File("/proc/cpuinfo").readAsStringSync();
-      final int cores = cpuInfo.split("\n").where((line) => line.startsWith("processor")).length;
+      final int cores = cpuInfo
+          .split("\n")
+          .where((line) => line.startsWith("processor"))
+          .length;
       String cpu = "unknown";
-      cpu = cpuInfo.split("\n").lastWhere((line) => line.startsWith("Hardware")).split(": ")[1].split("@")[0];
+      cpu = cpuInfo
+          .split("\n")
+          .lastWhere((line) => line.startsWith("Hardware"))
+          .split(": ")[1]
+          .split("@")[0];
       cpuData["name"] = "${cpu} (${cores})";
 
       return CpuData(cpuData);
@@ -62,8 +69,15 @@ CpuData getCpuData({
       };
 
       final String cpuInfo = File("/proc/cpuinfo").readAsStringSync();
-      int cores = cpuInfo.split("\n").where((line) => line.startsWith("processor")).length;
-      String cpu = cpuInfo.split("\n").firstWhere((line) => line.startsWith("model name")).split(": ")[1].split("@")[0];
+      int cores = cpuInfo
+          .split("\n")
+          .where((line) => line.startsWith("processor"))
+          .length;
+      String cpu = cpuInfo
+          .split("\n")
+          .firstWhere((line) => line.startsWith("model name"))
+          .split(": ")[1]
+          .split("@")[0];
 
       cpu = cpu.replaceAll("(R)", "");
       cpu = cpu.replaceAll("Core(TM)", "");

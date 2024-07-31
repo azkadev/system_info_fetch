@@ -127,7 +127,8 @@ void main(List<String> args) async {
       "cpu": "AMD Ryzen 5 5500U with Radeon Graphics (12)",
       "gpu": "Advanced Micro Devices, Inc. [AMD/ATI] Lucienne",
       "network": "MEDIATEK Corp. MT7921K (RZ608) Wi-Fi 6E 80MHz",
-      "disk": "Kingston Technology Company, Inc. OM8PCP Design-In PCIe 3 NVMe SSD (DRAM-less)",
+      "disk":
+          "Kingston Technology Company, Inc. OM8PCP Design-In PCIe 3 NVMe SSD (DRAM-less)",
       "power": "86% Charging",
       "ram_total": "15 GB",
       "ram_available": "8 GB",
@@ -140,13 +141,12 @@ void main(List<String> args) async {
       "ram_swap_total": "22 GB",
       "version": "",
       "device_name": "Realme 5",
-  "total_bandwith_download": "136.97 MB",
-  "total_bandwith_upload": "143.55 MB",
-  "total_bandwith": "280.52 MB",
-  "ram_usage_by_this_program": "271 MB",
- 
-  "executable_type": "cli", 
-  "uptime_program": "604 millisecond(s) ago", 
+      "total_bandwith_download": "136.97 MB",
+      "total_bandwith_upload": "143.55 MB",
+      "total_bandwith": "280.52 MB",
+      "ram_usage_by_this_program": "271 MB",
+      "executable_type": "cli",
+      "uptime_program": "604 millisecond(s) ago",
     },
     {
       "@type": "powerData",
@@ -155,5 +155,6 @@ void main(List<String> args) async {
     }
   ];
 
-  await jsonToScripts(schemes, directory: Directory(join(Directory.current.path, "lib", "scheme")));
+  await jsonToScripts(schemes,
+      directory: Directory(join(Directory.current.path, "lib", "scheme")));
 }

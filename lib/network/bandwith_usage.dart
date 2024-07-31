@@ -59,7 +59,10 @@ import 'package:universal_io/io.dart';
         for (var i = 0; i < datas.length; i++) {
           final String data_loop = datas[i];
 
-          List<String> data_loops = data_loop.split(" ").where((element) => element.trim().isNotEmpty).toList();
+          List<String> data_loops = data_loop
+              .split(" ")
+              .where((element) => element.trim().isNotEmpty)
+              .toList();
           if (data_loops.isEmpty) {
             continue;
           }
@@ -97,9 +100,12 @@ import 'package:universal_io/io.dart';
         int bandwith_upload = 0;
 
         for (var i = 0; i < datas.length; i++) {
-        final   String data_loop = datas[i];
+          final String data_loop = datas[i];
 
-         final List<String> data_loops = data_loop.split(" ").where((element) => element.trim().isNotEmpty).toList();
+          final List<String> data_loops = data_loop
+              .split(" ")
+              .where((element) => element.trim().isNotEmpty)
+              .toList();
           if (data_loops.isEmpty) {
             continue;
           }

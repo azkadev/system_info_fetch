@@ -52,7 +52,8 @@ String get gpuInfo {
     if (first != "Display" && first != "3D" && first != "VGA") {
       continue;
     }
-    String gpu = line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
+    String gpu =
+        line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
     if (gpu.startsWith("NVIDIA")) {
       gpu = RegExp("\\[(.*)\\]").firstMatch(gpu)?.group(1) ?? gpu;
     }
@@ -81,7 +82,8 @@ String get networkInfo {
     if (first != "Network") {
       continue;
     }
-    String network = line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
+    String network =
+        line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
 
     networks.add(network.trim());
   }
@@ -100,10 +102,14 @@ String get diskInfo {
     if (!line.contains(":")) continue;
 
     final first = line.split(" ")[1];
-    if (RegExp("^(Non-Volatile memory controller:)", caseSensitive: false).hasMatch(line) == false && first != "Non-Volatile") {
+    if (RegExp("^(Non-Volatile memory controller:)", caseSensitive: false)
+                .hasMatch(line) ==
+            false &&
+        first != "Non-Volatile") {
       continue;
     }
-    String network = line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
+    String network =
+        line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
 
     networks.add(network.trim());
   }
@@ -155,11 +161,19 @@ String? get shellInfo {
   String version = "";
   switch (shell) {
     case "zsh":
-      version = (Process.runSync(shellPath, ["--version"])).stdout.toString().split(" ")[1].trim();
+      version = (Process.runSync(shellPath, ["--version"]))
+          .stdout
+          .toString()
+          .split(" ")[1]
+          .trim();
       break;
     default:
       try {
-        version = (Process.runSync(shellPath, ["--version"])).stdout.toString().split(" ")[1].trim();
+        version = (Process.runSync(shellPath, ["--version"]))
+            .stdout
+            .toString()
+            .split(" ")[1]
+            .trim();
       } catch (e) {}
       break;
   }
@@ -171,7 +185,11 @@ String? get shellInfo {
 // }
 
 String get titleInfo {
-  return "${(Process.runSync("id", ["-un"])).stdout.toString().trim()}-${(Process.runSync("hostname", ["-f"])).stdout.toString().trim()}";
+  return "${(Process.runSync("id", [
+        "-un"
+      ])).stdout.toString().trim()}-${(Process.runSync("hostname", [
+        "-f"
+      ])).stdout.toString().trim()}";
 }
 
 String get modelInfo {

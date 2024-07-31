@@ -81,7 +81,10 @@ OperatingSystemData getOperatingSystemData({
           variables[split[0]] = split[1];
         }
       }
-      String os = variables["PRETTY_NAME"] ?? variables["NAME"] ?? variables["ID"] ?? "";
+      String os = variables["PRETTY_NAME"] ??
+          variables["NAME"] ??
+          variables["ID"] ??
+          "";
       if (os.startsWith('"')) {
         os = os.substring(1, os.length - 1);
       }

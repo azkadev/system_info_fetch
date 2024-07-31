@@ -6,7 +6,47 @@ class SystemInfoFetchData extends JsonScheme {
   SystemInfoFetchData(super.rawData);
 
   static Map get defaultData {
-    return {"@type": "systemInfoFetchData", "title": "", "os": "Ubuntu 23.10", "platform_type": "Linux", "arch": "x86_64", "host": "Modern 14 B5M REV:1.0 ", "kernel": "Linux 6.5.0-14-generic x86_64", "uptime": "6 Hours ", "shell": "zsh 5.9", "resolution": null, "de": null, "wm": "", "wm_theme": "", "theme": "", "icons": "", "terminal": "", "cpu": "AMD Ryzen 5 5500U with Radeon Graphics (12)", "gpu": "Advanced Micro Devices, Inc. [AMD/ATI] Lucienne", "network": "MEDIATEK Corp. MT7921K (RZ608) Wi-Fi 6E 80MHz", "disk": "Kingston Technology Company, Inc. OM8PCP Design-In PCIe 3 NVMe SSD (DRAM-less)", "power": "86% Charging", "ram_total": "15 GB", "ram_available": "8 GB", "ram_usage": "7 GB", "ram_cached": "6 GB", "swap_total": "7 GB", "swap_available": "7 GB", "swap_cache": "28 KB", "ram_commited": "16 GB", "ram_swap_total": "22 GB", "version": "", "device_name": "Realme 5", "total_bandwith_download": "136.97 MB", "total_bandwith_upload": "143.55 MB", "total_bandwith": "280.52 MB", "ram_usage_by_this_program": "271 MB", "executable_type": "cli", "uptime_program": "604 millisecond(s) ago"};
+    return {
+      "@type": "systemInfoFetchData",
+      "title": "",
+      "os": "Ubuntu 23.10",
+      "platform_type": "Linux",
+      "arch": "x86_64",
+      "host": "Modern 14 B5M REV:1.0 ",
+      "kernel": "Linux 6.5.0-14-generic x86_64",
+      "uptime": "6 Hours ",
+      "shell": "zsh 5.9",
+      "resolution": null,
+      "de": null,
+      "wm": "",
+      "wm_theme": "",
+      "theme": "",
+      "icons": "",
+      "terminal": "",
+      "cpu": "AMD Ryzen 5 5500U with Radeon Graphics (12)",
+      "gpu": "Advanced Micro Devices, Inc. [AMD/ATI] Lucienne",
+      "network": "MEDIATEK Corp. MT7921K (RZ608) Wi-Fi 6E 80MHz",
+      "disk":
+          "Kingston Technology Company, Inc. OM8PCP Design-In PCIe 3 NVMe SSD (DRAM-less)",
+      "power": "86% Charging",
+      "ram_total": "15 GB",
+      "ram_available": "8 GB",
+      "ram_usage": "7 GB",
+      "ram_cached": "6 GB",
+      "swap_total": "7 GB",
+      "swap_available": "7 GB",
+      "swap_cache": "28 KB",
+      "ram_commited": "16 GB",
+      "ram_swap_total": "22 GB",
+      "version": "",
+      "device_name": "Realme 5",
+      "total_bandwith_download": "136.97 MB",
+      "total_bandwith_upload": "143.55 MB",
+      "total_bandwith": "280.52 MB",
+      "ram_usage_by_this_program": "271 MB",
+      "executable_type": "cli",
+      "uptime_program": "604 millisecond(s) ago"
+    };
   }
 
   String? get special_type {
@@ -661,8 +701,10 @@ class SystemInfoFetchData extends JsonScheme {
       "uptime_program": uptime_program,
     };
 
-    systemInfoFetchData_data_create_json.removeWhere((key, value) => value == null);
-    SystemInfoFetchData systemInfoFetchData_data_create = SystemInfoFetchData(systemInfoFetchData_data_create_json);
+    systemInfoFetchData_data_create_json
+        .removeWhere((key, value) => value == null);
+    SystemInfoFetchData systemInfoFetchData_data_create =
+        SystemInfoFetchData(systemInfoFetchData_data_create_json);
 
     return systemInfoFetchData_data_create;
   }

@@ -50,8 +50,18 @@ MemoryData getRamData({
       final List<String> mems = memInfoRaw.split("\n");
       for (var i = 0; i < mems.length; i++) {
         final String mem = mems[i];
-        final String key = (mem.split(":").first.trim()).snakeCaseClass().trim().replaceAll(RegExp(r"([()]+)", caseSensitive: false), "_").replaceAll(RegExp(r"([_]+)", caseSensitive: false), "_").replaceAll(RegExp(r"^(_)", caseSensitive: false), "").replaceAll(RegExp(r"(_)$", caseSensitive: false), "").trim();
-        final int value = int.tryParse(RegExp(r"([0-9]+)", caseSensitive: false).stringMatch(mem.split(":").last.trim()) ?? "0") ?? 0;
+        final String key = (mem.split(":").first.trim())
+            .snakeCaseClass()
+            .trim()
+            .replaceAll(RegExp(r"([()]+)", caseSensitive: false), "_")
+            .replaceAll(RegExp(r"([_]+)", caseSensitive: false), "_")
+            .replaceAll(RegExp(r"^(_)", caseSensitive: false), "")
+            .replaceAll(RegExp(r"(_)$", caseSensitive: false), "")
+            .trim();
+        final int value = int.tryParse(RegExp(r"([0-9]+)", caseSensitive: false)
+                    .stringMatch(mem.split(":").last.trim()) ??
+                "0") ??
+            0;
         memoryData.addAll({
           key: value * 1024,
         });
@@ -66,8 +76,18 @@ MemoryData getRamData({
       final List<String> mems = memInfoRaw.split("\n");
       for (var i = 0; i < mems.length; i++) {
         final String mem = mems[i];
-        final String key = (mem.split(":").first.trim()).snakeCaseClass().trim().replaceAll(RegExp(r"([()]+)", caseSensitive: false), "_").replaceAll(RegExp(r"([_]+)", caseSensitive: false), "_").replaceAll(RegExp(r"^(_)", caseSensitive: false), "").replaceAll(RegExp(r"(_)$", caseSensitive: false), "").trim();
-        final int value = int.tryParse(RegExp(r"([0-9]+)", caseSensitive: false).stringMatch(mem.split(":").last.trim()) ?? "0") ?? 0;
+        final String key = (mem.split(":").first.trim())
+            .snakeCaseClass()
+            .trim()
+            .replaceAll(RegExp(r"([()]+)", caseSensitive: false), "_")
+            .replaceAll(RegExp(r"([_]+)", caseSensitive: false), "_")
+            .replaceAll(RegExp(r"^(_)", caseSensitive: false), "")
+            .replaceAll(RegExp(r"(_)$", caseSensitive: false), "")
+            .trim();
+        final int value = int.tryParse(RegExp(r"([0-9]+)", caseSensitive: false)
+                    .stringMatch(mem.split(":").last.trim()) ??
+                "0") ??
+            0;
         memoryData.addAll({
           key: value * 1024,
         });
@@ -93,7 +113,15 @@ int getRamUsageByPid({
     if (Dart.isAndroid || Dart.isLinux) {
       final File proc_status = File("/proc/${pid_procces}/status");
       // [VmRSS  , 256364, kB]
-      final List<String> vm_rss = proc_status.readAsStringSync().split("\n").firstWhere((element) => RegExp("VmRSS", caseSensitive: false).hasMatch(element)).replaceAll(RegExp(":", caseSensitive: false), "").split(" ").where((element) => element.isNotEmpty).toList();
+      final List<String> vm_rss = proc_status
+          .readAsStringSync()
+          .split("\n")
+          .firstWhere((element) =>
+              RegExp("VmRSS", caseSensitive: false).hasMatch(element))
+          .replaceAll(RegExp(":", caseSensitive: false), "")
+          .split(" ")
+          .where((element) => element.isNotEmpty)
+          .toList();
       final int vm_rss_size = (int.tryParse(vm_rss[1]) ?? 0) * 1024;
       return vm_rss_size;
     }
