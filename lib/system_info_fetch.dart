@@ -48,32 +48,69 @@ import 'package:system_info_fetch/os/os_core.dart';
 import 'package:system_info_fetch/power/power.dart';
 import 'package:system_info_fetch/scheme/scheme.dart';
 
-import 'src/system_info_fetch_base.dart' as sys_info;
+import 'base/system_info_fetch_base.dart' as sys_info;
 
 final DateTime _date_start = DateTime.now();
 
 class SystemInfoFetch {
   static DateTime get date_start => _date_start;
+  static bool is_use_static = false;
   const SystemInfoFetch();
 
+  static void ensureInitialized({
+    required bool isUseStatic,
+  }) {
+    SystemInfoFetch.is_use_static = isUseStatic;
+  }
+
+  static String? get_gpu_static;
+  static bool is_init_get_gpu = false;
   static String? get get_gpu {
     try {
+      if (is_use_static) {
+        if (is_init_get_gpu) {
+          return get_gpu_static;
+        }
+        get_gpu_static = sys_info.gpuInfo;
+        is_init_get_gpu = true;
+        return get_gpu_static;
+      }
       return sys_info.gpuInfo;
     } catch (e) {
       return null;
     }
   }
 
+  static String? get_network_static;
+  static bool is_init_get_network = false;
   static String? get get_network {
     try {
+      if (is_use_static) {
+        if (is_init_get_network) {
+          return get_network_static;
+        }
+        get_network_static = sys_info.networkInfo;
+        is_init_get_network = true;
+        return get_network_static;
+      }
       return sys_info.networkInfo;
     } catch (e) {
       return null;
     }
   }
 
+  static String? get_disk_static;
+  static bool is_init_get_disk = false;
   static String? get get_disk {
     try {
+      if (is_use_static) {
+        if (is_init_get_disk) {
+          return get_disk_static;
+        }
+        get_disk_static = sys_info.diskInfo;
+        is_init_get_disk = true;
+        return get_disk_static;
+      }
       return sys_info.diskInfo;
     } catch (e) {
       return null;
@@ -89,25 +126,57 @@ class SystemInfoFetch {
     }
   }
 
+  static String? get_uptime_static;
+  static bool is_init_get_uptime = false;
   static String? get get_uptime {
     try {
+      if (is_use_static) {
+        if (is_init_get_uptime) {
+          return get_uptime_static;
+        }
+        get_uptime_static = sys_info.upTimeInfo;
+        is_init_get_uptime = true;
+        return get_uptime_static;
+      }
       return sys_info.upTimeInfo;
     } catch (e) {
       print(e);
       return null;
     }
   }
+  static String? get_kernel_static;
+  static bool is_init_get_kernel = false;
+
 
   static String? get get_kernel {
     try {
+      if (is_use_static) {
+        if (is_init_get_kernel) {
+          return get_kernel_static;
+        }
+        get_kernel_static = sys_info.kernelInfo;
+        is_init_get_kernel = true;
+        return get_kernel_static;
+      }
       return sys_info.kernelInfo;
     } catch (e) {
       return null;
     }
   }
 
+  static String? get_shell_static;
+  static bool is_init_get_shell = false;
+
   static String? get get_shell {
     try {
+      if (is_use_static) {
+        if (is_init_get_shell) {
+          return get_shell_static;
+        }
+        get_shell_static = sys_info.shellInfo;
+        is_init_get_shell = true;
+        return get_shell_static;
+      }
       return sys_info.shellInfo;
     } catch (e) {
       return null;
@@ -117,9 +186,19 @@ class SystemInfoFetch {
   static String Function(String origin_model) onGetTitle = (String originModel) {
     return originModel;
   };
+  static String? get_title_static;
+  static bool is_init_get_title = false;
 
   static String? get get_title {
     try {
+      if (is_use_static) {
+        if (is_init_get_title) {
+          return get_title_static;
+        }
+        get_title_static = onGetTitle(sys_info.titleInfo.trim());
+        is_init_get_title = true;
+        return get_title_static;
+      }
       return onGetTitle(sys_info.titleInfo.trim());
     } catch (e) {
       try {
@@ -130,8 +209,18 @@ class SystemInfoFetch {
     }
   }
 
+  static String? get_arch_static;
+  static bool is_init_get_arch = false;
   static Future<String?> get get_arch async {
     try {
+      if (is_use_static) {
+        if (is_init_get_arch) {
+          return get_arch_static;
+        }
+        get_arch_static = await sys_info.archInfo();
+        is_init_get_arch = true;
+        return get_arch_static;
+      }
       return await sys_info.archInfo();
     } catch (e) {
       return null;
@@ -150,8 +239,19 @@ class SystemInfoFetch {
     return originModel;
   };
 
+  static String? get_model_static;
+  static bool is_init_get_model = false;
   static String? get get_model {
     try {
+      if (is_use_static) {
+        if (is_init_get_model) {
+          return get_model_static;
+        }
+        get_model_static = onGetModel(sys_info.modelInfo.trim());
+        is_init_get_model = true;
+        return get_model_static;
+      }
+
       return onGetModel(sys_info.modelInfo.trim());
     } catch (e) {
       try {
