@@ -34,6 +34,9 @@ Bukan maksud kami menipu itu karena harga yang sudah di kalkulasi + bantuan tiba
 <!-- END LICENSE --> */
 // ignore_for_file: unnecessary_brace_in_string_interps, empty_catches
 
+import 'dart:async';
+import 'dart:isolate';
+
 import 'package:general_lib/general_lib.dart';
 import 'package:universal_io/io.dart';
 
@@ -52,8 +55,7 @@ String get gpuInfo {
     if (first != "Display" && first != "3D" && first != "VGA") {
       continue;
     }
-    String gpu =
-        line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
+    String gpu = line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
     if (gpu.startsWith("NVIDIA")) {
       gpu = RegExp("\\[(.*)\\]").firstMatch(gpu)?.group(1) ?? gpu;
     }
@@ -82,8 +84,7 @@ String get networkInfo {
     if (first != "Network") {
       continue;
     }
-    String network =
-        line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
+    String network = line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
 
     networks.add(network.trim());
   }
@@ -102,14 +103,10 @@ String get diskInfo {
     if (!line.contains(":")) continue;
 
     final first = line.split(" ")[1];
-    if (RegExp("^(Non-Volatile memory controller:)", caseSensitive: false)
-                .hasMatch(line) ==
-            false &&
-        first != "Non-Volatile") {
+    if (RegExp("^(Non-Volatile memory controller:)", caseSensitive: false).hasMatch(line) == false && first != "Non-Volatile") {
       continue;
     }
-    String network =
-        line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
+    String network = line.split(": ")[1].replaceAll(RegExp("\\(rev .*\\)\$"), "").trim();
 
     networks.add(network.trim());
   }
@@ -123,15 +120,39 @@ String get kernelInfo {
   return (Process.runSync("uname", ["-srp"])).stdout.toString().trim();
 }
 
-String get archInfo {
-  if (Dart.isAndroid) {
-    // asnrv
-    return ((Process.runSync("uname", [
-      "-m",
-    ])).stdout.toString().trim());
-  }
-  return (Process.runSync("uname", ["-p"])).stdout.toString().trim();
+Future<String> archInfo() {
+
+  return Isolate.run(()async {
+    final processResult = await Process.run(
+      "uname",
+      [(Dart.isAndroid) ? "-m" : "-p"],
+    );
+    final res = processResult.stdout;
+    if (res is String) {
+      return res;
+    } else {
+      return "";
+    }
+  });
+  // if (Dart.isAndroid) {
+  //   Process.run("uname", arguments);
+  //   // asnrv
+  //   return Process.runSync("uname", [
+  //     "-m",
+  //   ]).stdout.toString().trim();
+  // }
+  // return Process.runSync("uname", ["-p"]).stdout.toString().trim();
 }
+
+// String archInfo() {
+//   if (Dart.isAndroid) {
+//     // asnrv
+//     return Process.runSync("uname", [
+//       "-m",
+//     ]).stdout.toString().trim();
+//   }
+//   return Process.runSync("uname", ["-p"]).stdout.toString().trim();
+// }
 
 String? get upTimeInfo {
   if (Dart.isAndroid) {
@@ -161,19 +182,11 @@ String? get shellInfo {
   String version = "";
   switch (shell) {
     case "zsh":
-      version = (Process.runSync(shellPath, ["--version"]))
-          .stdout
-          .toString()
-          .split(" ")[1]
-          .trim();
+      version = (Process.runSync(shellPath, ["--version"])).stdout.toString().split(" ")[1].trim();
       break;
     default:
       try {
-        version = (Process.runSync(shellPath, ["--version"]))
-            .stdout
-            .toString()
-            .split(" ")[1]
-            .trim();
+        version = (Process.runSync(shellPath, ["--version"])).stdout.toString().split(" ")[1].trim();
       } catch (e) {}
       break;
   }
@@ -185,11 +198,7 @@ String? get shellInfo {
 // }
 
 String get titleInfo {
-  return "${(Process.runSync("id", [
-        "-un"
-      ])).stdout.toString().trim()}-${(Process.runSync("hostname", [
-        "-f"
-      ])).stdout.toString().trim()}";
+  return "${(Process.runSync("id", ["-un"])).stdout.toString().trim()}-${(Process.runSync("hostname", ["-f"])).stdout.toString().trim()}";
 }
 
 String get modelInfo {

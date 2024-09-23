@@ -10,7 +10,7 @@ dev_dependencies:
   test: '^1.16.0'
 dependencies: 
   universal_io: '^2.2.2'
-  general_lib: '^0.0.43'
+  general_lib: '^0.0.44'
   path: '^1.9.0'
 dependency_overrides: 
   pointycastle: '3.8.0'
