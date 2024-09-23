@@ -54,7 +54,7 @@ final DateTime _date_start = DateTime.now();
 
 class SystemInfoFetch {
   static DateTime get date_start => _date_start;
-  static bool is_use_static = false;
+  static bool is_use_static = true;
   const SystemInfoFetch();
 
   static void ensureInitialized({
