@@ -1,6 +1,6 @@
 name: 'system_info_fetch'
 description: 'A library for get system info detail like ram or proccesor ram in dart support client side and server side.'
-version: '0.0.23'
+version: '0.0.24'
 homepage: 'https://github.com/azkadev/azkadev'
 repository: 'https://github.com/azkadev/system_info_fetch'
 environment: 
@@ -10,7 +10,7 @@ dev_dependencies:
   test: 'any'
 dependencies: 
   universal_io: '^2.2.2'
-  general_lib: '^0.0.45'
+  general_lib: '^0.0.46'
   path: '^1.9.0'
 dependency_overrides: 
   pointycastle: '3.8.0'

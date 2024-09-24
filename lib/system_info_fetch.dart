@@ -46,6 +46,7 @@ import 'package:system_info_fetch/memory/memory_core.dart';
 import 'package:system_info_fetch/network/bandwith_usage.dart';
 import 'package:system_info_fetch/os/os_core.dart';
 import 'package:system_info_fetch/power/power.dart';
+import 'package:system_info_fetch/power_consumtion/power_consumtion.dart';
 import 'package:system_info_fetch/scheme/scheme.dart';
 
 import 'base/system_info_fetch_base.dart' as sys_info;
@@ -282,6 +283,14 @@ class SystemInfoFetch {
     }
   }
 
+
+  static String? get get_power_consumtion {
+    try {
+      return powerConsumtion();
+    } catch (e) {
+      return null;
+    }
+  }
   static (int download, int upload) get get_network_bandwith_usage {
     return getNetworkBandwithUsage();
   }
@@ -374,6 +383,7 @@ class SystemInfoFetch {
       "network": get_network,
       "disk": get_disk,
       "power": get_power,
+      "power_consumtion": get_power_consumtion,
       "ram_total": FileSize.filesize(
         size: memory_ram.mem_total ?? 0,
       ),
